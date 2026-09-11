@@ -1,0 +1,48 @@
+﻿@using OrchardCoreEFCoreData
+@model DbSet<Event>;
+
+@{
+    ViewData["Title"] = "Home Page";
+    var events = Model?.ToList() ?? new List<Event>();
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (!events.Any())
+{
+    <p>No events found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Event Id</th>
+                <th>Event Date/Time</th>
+                <th>Ingested Date/Time</th>
+                <th>Device Reference</th>
+                <th>Device Type</th>
+                <th>Event Type Code</th>
+                <th>Loop Count</th>
+                <th>Source</th>
+                <th>Destination</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var evt in events)
+            {
+                <tr>
+                    <td>@evt.EventId</td>
+                    <td>@evt.EventDateTime</td>
+                    <td>@evt.IngestedDateTime</td>
+                    <td>@evt.DeviceReference</td>
+                    <td>@evt.DeviceType</td>
+                    <td>@evt.EventTypeCode</td>
+                    <td>@evt.LoopCount</td>
+                    <td>@evt.Source</td>
+                    <td>@evt.Destination</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
